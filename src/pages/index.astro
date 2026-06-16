@@ -1,55 +1,135 @@
-<main class="max-w-2xl mx-auto px-4 py-12">
-  <!-- Hero Section -->
-  <header class="mb-12">
-    <h1 class="text-3xl font-bold tracking-tight mb-2">Obaid Ur Rahman Syed</h1>
-    <p class="text-xl text-zinc-400">Growth Operations & Strategy</p>
-  </header>
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
 
-  <!-- What I Do -->
-  <section class="mb-12 space-y-4">
-    <p class="text-zinc-300 leading-relaxed">
-      I build and optimize the digital sales infrastructure for technical business platforms. As the Operations and Creative Lead at GlyphicX and a growth strategist for enterprise ecosystems, I translate complex software capabilities into clear, high-signal market positioning.
-    </p>
-    <p class="text-zinc-300 leading-relaxed">
-      My work focuses purely on execution and data integrity—eliminating vague marketing narratives in favor of measurable pipeline performance.
-    </p>
-  </section>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				max-w: 720px;
+				margin: 0 auto;
+				padding: 3em 1em;
+			}
+			section {
+				margin-bottom: 3rem;
+			}
+			h1 {
+				font-size: 2.5rem;
+				margin-bottom: 0.5rem;
+			}
+			.subtitle {
+				color: #666;
+				font-size: 1.25rem;
+				margin-bottom: 2rem;
+			}
+			.track-record-title {
+				text-transform: uppercase;
+				font-size: 0.85rem;
+				letter-spacing: 0.05em;
+				color: #666;
+				border-bottom: 1px solid #eee;
+				padding-bottom: 0.5rem;
+				margin-bottom: 1.5rem;
+			}
+			.job-entry {
+				margin-bottom: 1.5rem;
+			}
+			.job-entry h3 {
+				margin-bottom: 0.25rem;
+			}
+			.job-meta {
+				font-size: 0.9rem;
+				color: #666;
+				margin-bottom: 0.5rem;
+			}
+			.cta-buttons {
+				display: flex;
+				gap: 1.5rem;
+				align-items: center;
+				margin-top: 1rem;
+			}
+			.btn-primary {
+				background: #111;
+				color: #fff;
+				padding: 0.5rem 1rem;
+				text-decoration: none;
+				border-radius: 4px;
+				font-size: 0.9rem;
+			}
+			.btn-primary:hover {
+				background: #333;
+			}
+			.btn-secondary {
+				color: #666;
+				text-decoration: none;
+				font-size: 0.9rem;
+			}
+			.btn-secondary:hover {
+				color: #111;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<!-- Hero Section -->
+			<header>
+				<h1>Obaid Ur Rahman</h1>
+				<p class="subtitle">Growth Operations & Strategy</p>
+			</header>
 
-  <!-- Proven Engagements -->
-  <section class="mb-12">
-    <h2 class="text-lg font-semibold mb-4 tracking-wide uppercase text-zinc-400">Track Record</h2>
-    <div class="space-y-6">
-      <div>
-        <h3 class="font-medium text-zinc-100">Eaxeesoft (Odoo Consultancy)</h3>
-        <p class="text-sm text-zinc-400 mb-1">Growth Operations & Funnel Strategist</p>
-        <p class="text-zinc-300 text-sm">Architecting the digital sales infrastructure and growth funnels to scale regional Odoo implementations.</p>
-      </div>
+			<!-- What I Do -->
+			<section>
+				<p>
+					I build and optimize the digital sales infrastructure for technical business platforms. As the Operations and Creative Lead at GlyphicX and a growth strategist for enterprise ecosystems, I translate complex software capabilities into clear, high-signal market positioning.
+				</p>
+				<p>
+					My work focuses purely on execution and data integrity—eliminating vague marketing narratives in favor of measurable pipeline performance.
+				</p>
+			</section>
 
-      <div>
-        <h3 class="font-medium text-zinc-100">Eaxee (Enterprise Architecture Management)</h3>
-        <p class="text-sm text-zinc-400 mb-1">Creative & Marketing Strategy via GlyphicX</p>
-        <p class="text-zinc-300 text-sm">Directing the full-stack creative-tech pipeline to communicate high-level EAM value propositions. The platform is deployed at enterprise scale, including Red Sea Global.</p>
-      </div>
+			<!-- Proven Engagements -->
+			<section>
+				<h2 class="track-record-title">Track Record</h2>
+				
+				<div class="job-entry">
+					<h3>Eaxeesoft (Odoo Consultancy)</h3>
+					<div class="job-meta">Growth Operations & Funnel Strategist</div>
+					<p>Architecting the digital sales infrastructure and growth funnels to scale regional Odoo implementations.</p>
+				</div>
 
-      <div>
-        <h3 class="font-medium text-zinc-100">Operational Excellence</h3>
-        <p class="text-sm text-zinc-400 mb-1">Recognition</p>
-        <p class="text-zinc-300 text-sm">Awarded by Mindstorm for distinct operational execution and strategic management.</p>
-      </div>
-    </div>
-  </section>
+				<div class="job-entry">
+					<h3>Eaxee (Enterprise Architecture Management)</h3>
+					<div class="job-meta">Creative & Marketing Strategy via GlyphicX</div>
+					<p>Directing the full-stack creative-tech pipeline to communicate high-level EAM value propositions. The platform is deployed at enterprise scale, including Red Sea Global.</p>
+				</div>
 
-  <!-- Clear Call to Action -->
-  <section class="border-t border-zinc-800 pt-8">
-    <h2 class="text-lg font-semibold mb-2 text-zinc-100">Connect</h2>
-    <p class="text-zinc-400 text-sm mb-4">For consulting, operational auditing, or strategic engagements.</p>
-    <div class="flex gap-4">
-      <a href="mailto:obaid@glyphicx.com" class="text-sm font-medium text-white bg-zinc-800 hover:bg-zinc-700 px-4 py-2 rounded transition">
-        Email Directly
-      </a>
-      <a href="https://linkedin.com/in/obaidsayyed" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-zinc-400 hover:text-zinc-100 self-center">
-        LinkedIn →
-      </a>
-    </div>
-  </section>
-</main>
+				<div class="job-entry">
+					<h3>Operational Excellence</h3>
+					<div class="job-meta">Recognition</div>
+					<p>Awarded by Mindstorm for distinct operational execution and strategic management.</p>
+				</div>
+			</section>
+
+			<!-- Clear Call to Action -->
+			<section style="border-top: 1px solid #eee; pt: 2rem;">
+				<h3>Connect</h3>
+				<p style="color: #666; font-size: 0.9rem;">For consulting, operational auditing, or strategic engagements.</p>
+				<div class="cta-buttons">
+					<a href="mailto:your.email@domain.com" class="btn-primary">
+						Email Directly
+					</a>
+					<a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+						LinkedIn →
+					</a>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
