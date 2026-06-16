@@ -1,32 +1,55 @@
----
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
----
+<main class="max-w-2xl mx-auto px-4 py-12">
+  <!-- Hero Section -->
+  <header class="mb-12">
+    <h1 class="text-3xl font-bold tracking-tight mb-2">Obaid Ur Rahman Syed</h1>
+    <p class="text-xl text-zinc-400">Growth Operations & Strategy</p>
+  </header>
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>Operations and Creative Lead.</h1>
-<p>
-  Architecting digital sales infrastructure for enterprise software and B2B SaaS. 
-  I bridge the gap between complex technical value and market clarity.
-</p>
-<p>
-  At <strong>GlyphicX</strong>, I lead a team of 8 in an AI-assisted creative pipeline. 
-  As the fractional Head of Growth at <strong>Eaxeesoft</strong>, I am building 
-  sales infrastructure for the EMEA Odoo market from scratch. 
-  From deploying Enterprise Architecture Management platforms at Red Sea Global to 
-  streamlining RevOps, I leverage my background in motion design to simplify 
-  the complex.
-</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+  <!-- What I Do -->
+  <section class="mb-12 space-y-4">
+    <p class="text-zinc-300 leading-relaxed">
+      I build and optimize the digital sales infrastructure for technical business platforms. As the Operations and Creative Lead at GlyphicX and a growth strategist for enterprise ecosystems, I translate complex software capabilities into clear, high-signal market positioning.
+    </p>
+    <p class="text-zinc-300 leading-relaxed">
+      My work focuses purely on execution and data integrity—eliminating vague marketing narratives in favor of measurable pipeline performance.
+    </p>
+  </section>
+
+  <!-- Proven Engagements -->
+  <section class="mb-12">
+    <h2 class="text-lg font-semibold mb-4 tracking-wide uppercase text-zinc-400">Track Record</h2>
+    <div class="space-y-6">
+      <div>
+        <h3 class="font-medium text-zinc-100">Eaxeesoft (Odoo Consultancy)</h3>
+        <p class="text-sm text-zinc-400 mb-1">Growth Operations & Funnel Strategist</p>
+        <p class="text-zinc-300 text-sm">Architecting the digital sales infrastructure and growth funnels to scale regional Odoo implementations.</p>
+      </div>
+
+      <div>
+        <h3 class="font-medium text-zinc-100">Eaxee (Enterprise Architecture Management)</h3>
+        <p class="text-sm text-zinc-400 mb-1">Creative & Marketing Strategy via GlyphicX</p>
+        <p class="text-zinc-300 text-sm">Directing the full-stack creative-tech pipeline to communicate high-level EAM value propositions. The platform is deployed at enterprise scale, including Red Sea Global.</p>
+      </div>
+
+      <div>
+        <h3 class="font-medium text-zinc-100">Operational Excellence</h3>
+        <p class="text-sm text-zinc-400 mb-1">Recognition</p>
+        <p class="text-zinc-300 text-sm">Awarded by Mindstorm for distinct operational execution and strategic management.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clear Call to Action -->
+  <section class="border-t border-zinc-800 pt-8">
+    <h2 class="text-lg font-semibold mb-2 text-zinc-100">Connect</h2>
+    <p class="text-zinc-400 text-sm mb-4">For consulting, operational auditing, or strategic engagements.</p>
+    <div class="flex gap-4">
+      <a href="mailto:your.email@domain.com" class="text-sm font-medium text-white bg-zinc-800 hover:bg-zinc-700 px-4 py-2 rounded transition">
+        Email Directly
+      </a>
+      <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-zinc-400 hover:text-zinc-100 self-center">
+        LinkedIn →
+      </a>
+    </div>
+  </section>
+</main>
