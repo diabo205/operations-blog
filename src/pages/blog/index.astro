@@ -5,6 +5,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
+import RisoFrame from '../../components/RisoFrame.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
@@ -17,9 +18,6 @@ const posts = (await getCollection('blog')).sort(
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
-			main {
-				width: 960px;
-			}
 			ul {
 				display: flex;
 				flex-wrap: wrap;
@@ -31,7 +29,7 @@ const posts = (await getCollection('blog')).sort(
 			ul li {
 				width: calc(50% - 1rem);
 			}
-			ul li * {
+			ul li a {
 				text-decoration: none;
 				transition: 0.2s ease;
 			}
@@ -48,26 +46,32 @@ const posts = (await getCollection('blog')).sort(
 			}
 			ul li img {
 				margin-bottom: 0.5rem;
-				border-radius: 12px;
+				border: 1px solid var(--riso-teal);
 			}
 			ul li a {
 				display: block;
 			}
 			.title {
 				margin: 0;
-				color: rgb(var(--black));
+				color: var(--riso-teal);
 				line-height: 1;
+				font-family: var(--font-clinical);
+				text-transform: uppercase;
 			}
 			.date {
 				margin: 0;
-				color: rgb(var(--gray));
+				color: var(--riso-teal);
+				opacity: 0.7;
+				font-family: var(--font-technical);
+				font-size: 0.75rem;
+				letter-spacing: 0.05em;
 			}
 			ul li a:hover h4,
 			ul li a:hover .date {
-				color: rgb(var(--accent));
+				color: var(--riso-vermilion);
 			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
+			ul li a:hover img {
+				border-color: var(--riso-vermilion);
 			}
 			@media (max-width: 720px) {
 				ul {
@@ -88,7 +92,7 @@ const posts = (await getCollection('blog')).sort(
 	</head>
 	<body>
 		<Header />
-		<main>
+		<RisoFrame label="BLOG INDEX">
 			<section>
 				<ul>
 					{
@@ -108,7 +112,7 @@ const posts = (await getCollection('blog')).sort(
 					}
 				</ul>
 			</section>
-		</main>
+		</RisoFrame>
 		<Footer />
 	</body>
 </html>

@@ -1,141 +1,368 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+/* ============================================================
+   RISOGRAPH TECHNICAL-PRINT AESTHETIC
+   Design tokens, typography, dark variant, tables, blockouts,
+   halftone, print CSS
+   ============================================================ */
 
+/* ---- Design Tokens ---- */
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
-}
-body {
-	font-family: var(--font-atkinson);
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
-}
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
-a {
-	color: var(--accent);
-}
-a:hover {
-	color: var(--accent);
-}
-p {
-	margin-bottom: 1em;
-}
-.prose p {
-	margin-bottom: 2em;
-}
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
-}
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
+  --riso-paper: #F5F0E6;
+  --riso-ink: #0A1118;
+  --riso-teal: #1A4B5E;
+  --riso-vermilion: #E67E22;
+  --riso-yellow: #F3C137;
+  --riso-cream: #F5E8D0;
+  --riso-electric: #00FF9F;
+
+  --font-clinical: "Barlow Condensed", "Impact", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-technical: "Space Mono", "JetBrains Mono", monospace;
 }
 
-.sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
-	white-space: nowrap;
+/* ============================================================
+   BASE - PAPER MODE (site default)
+   ============================================================ */
+
+html {
+  background-color: var(--riso-paper);
+  color: var(--riso-ink);
+  font-family: var(--font-body);
+}
+
+body {
+  background-color: var(--riso-paper);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- Headings ----
+   h1 stays on paper (cream bg, teal ink).
+   h2 and h3 FLIP to dark variant: carbon black bar + cream text. */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-clinical);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  font-weight: 800;
+}
+
+h1 {
+  color: var(--riso-teal);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: 1.5rem;
+}
+
+/* ---- DARK VARIANT ON SECTION HEADERS ---- */
+h2 {
+  background-color: var(--riso-ink);
+  color: var(--riso-cream);
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  padding: 0.75rem 1rem;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  border-left: 6px solid var(--riso-electric);
+  position: relative;
+}
+
+h3 {
+  background-color: var(--riso-ink);
+  color: var(--riso-cream);
+  font-size: clamp(1.25rem, 3vw, 1.875rem);
+  padding: 0.5rem 0.875rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--riso-electric);
+}
+
+h4, h5, h6 {
+  color: var(--riso-teal);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--riso-teal);
+  padding-bottom: 0.25rem;
+}
+
+/* ---- Body text & links ---- */
+p {
+  font-family: var(--font-body);
+  line-height: 1.65;
+  margin-bottom: 1.1rem;
+  color: var(--riso-ink);
+}
+
+a {
+  color: var(--riso-teal);
+  text-decoration: underline;
+  text-decoration-color: var(--riso-vermilion);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+  transition: color 0.15s ease;
+}
+a:hover { color: var(--riso-vermilion); }
+a:focus-visible {
+  outline: 2px solid var(--riso-electric);
+  outline-offset: 3px;
+}
+
+/* ---- Inline code (paper baseline) ---- */
+:not(pre) > code {
+  font-family: var(--font-technical);
+  background-color: rgba(26, 75, 94, 0.08);
+  color: var(--riso-teal);
+  padding: 0.1em 0.4em;
+  border: 1px solid rgba(26, 75, 94, 0.2);
+  font-size: 0.875em;
+  border-radius: 2px;
+}
+
+/* ---- Code blocks: DARK VARIANT (Slide 1 terminal aesthetic) ---- */
+pre {
+  background-color: var(--riso-ink);
+  color: var(--riso-cream);
+  font-family: var(--font-technical);
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid var(--riso-electric);
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  position: relative;
+  border-radius: 0;
+}
+
+pre.riso-terminal::before {
+  content: "";
+  position: absolute;
+  top: 0.6rem;
+  right: 0.8rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: var(--riso-electric);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--riso-electric);
+}
+
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* Syntax highlighting tweaks for dark variant */
+pre .token.comment,
+pre .token.prolog,
+pre .token.doctype { color: #6b7a85; font-style: italic; }
+pre .token.keyword,
+pre .token.boolean,
+pre .token.number { color: var(--riso-electric); }
+pre .token.string,
+pre .token.char { color: var(--riso-yellow); }
+pre .token.function,
+pre .token.class-name { color: var(--riso-cream); font-weight: 700; }
+pre .token.operator,
+pre .token.punctuation { color: #c5d1dc; }
+pre .token.attr-name,
+pre .token.property { color: var(--riso-vermilion); }
+
+/* ---- Tables: blueprint grid ---- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid var(--riso-teal);
+  margin: 1.5rem 0;
+  font-family: var(--font-technical);
+  font-size: 0.875rem;
+  background-color: var(--riso-paper);
+}
+
+th {
+  background-color: var(--riso-teal);
+  color: var(--riso-paper);
+  font-family: var(--font-clinical);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border: 1px solid var(--riso-teal);
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--riso-teal);
+  vertical-align: top;
+  color: var(--riso-ink);
+}
+
+tr:nth-child(even) td {
+  background-color: rgba(230, 126, 34, 0.05);
+}
+
+/* ---- Blockquotes: high-visibility spot-color blocks ---- */
+blockquote {
+  border-left: 4px solid var(--riso-vermilion);
+  background-color: rgba(243, 193, 55, 0.15);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--riso-teal);
+  position: relative;
+  overflow: hidden;
+}
+
+blockquote::before {
+  content: "DATA QUALITY AUDIT NOTE";
+  display: block;
+  font-style: normal;
+  font-family: var(--font-clinical);
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--riso-vermilion);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+/* ---- Lists ---- */
+ul, ol {
+  margin: 1rem 0 1.5rem 1.5rem;
+  line-height: 1.65;
+}
+li { margin-bottom: 0.4rem; text-align: left; }
+
+/* ---- Halftone text utility (Slide 1 "Prompts" effect) ---- */
+.halftone-text {
+  background-image: radial-gradient(
+    circle,
+    var(--riso-electric) 1.5px,
+    transparent 1.6px
+  );
+  background-size: 4px 4px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---- Selection ---- */
+::selection {
+  background-color: var(--riso-vermilion);
+  color: var(--riso-paper);
+}
+
+/* ---- Images in prose keep clean borders ---- */
+.prose img {
+  border: 1px solid var(--riso-teal);
+  border-radius: 0;
+}
+
+/* ============================================================
+   TECHNICAL PRINT FRAME
+   ============================================================ */
+
+.riso-page {
+  background-color: var(--riso-paper);
+  color: var(--riso-ink);
+  min-height: 100vh;
+  padding: 1.5rem;
+  position: relative;
+  font-family: var(--font-body);
+}
+
+.riso-frame {
+  border: 1px solid var(--riso-teal);
+  max-width: 56rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  position: relative;
+  background-color: var(--riso-paper);
+}
+
+.riso-frame::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--riso-teal);
+  border-radius: 50%;
+  background-color: var(--riso-paper);
+}
+
+.riso-frame::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--riso-ink);
+}
+
+/* ============================================================
+   PRINT TEXTURE OVERLAY
+   ============================================================ */
+
+.riso-noise {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* ============================================================
+   MOBILE FALLBACKS
+   ============================================================ */
+
+@media (max-width: 640px) {
+  .riso-page { padding: 0.75rem; }
+  .riso-frame { padding: 1.25rem; margin: 1rem auto; }
+  h2 { padding: 0.6rem 0.75rem; }
+  h3 { padding: 0.4rem 0.6rem; }
+  pre { padding: 1rem; font-size: 0.8rem; }
+  table { font-size: 0.75rem; }
+  th, td { padding: 0.5rem 0.6rem; }
+}
+
+/* ============================================================
+   PRINT CSS
+   ============================================================ */
+
+@media print {
+  .riso-noise { display: none; }
+  .riso-page { padding: 0; }
+  .riso-frame { border: none; margin: 0; padding: 0; max-width: none; }
+  .riso-frame::before,
+  .riso-frame::after { display: none; }
+  h2, h3 {
+    background-color: transparent !important;
+    color: #000 !important;
+    border-left: 2px solid #000 !important;
+    border-bottom: 1px solid #000;
+    padding: 0.25rem 0;
+  }
+  pre {
+    background-color: transparent !important;
+    color: #000 !important;
+    border-left: 2px solid #000 !important;
+    page-break-inside: avoid;
+  }
+  a { color: #000; text-decoration: underline; }
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75rem;
+    color: #555;
+  }
 }

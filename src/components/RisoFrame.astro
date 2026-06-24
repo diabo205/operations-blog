@@ -1,0 +1,29 @@
+---
+import RegistrationMark from "./RegistrationMark.astro";
+interface Props {
+  /** Optional headline label shown top-left of the frame, e.g. "FILE 042" */
+  label?: string;
+}
+const { label } = Astro.props;
+---
+<div class="riso-page">
+  <RegistrationMark class="absolute top-2 left-2" style="color: var(--riso-teal); opacity: 0.6;" />
+  <RegistrationMark class="absolute top-2 right-2" style="color: var(--riso-teal); opacity: 0.6;" />
+  <RegistrationMark class="absolute bottom-2 left-2" style="color: var(--riso-teal); opacity: 0.6;" />
+  <RegistrationMark class="absolute bottom-2 right-2" style="color: var(--riso-teal); opacity: 0.6;" />
+
+  {label && (
+    <div
+      class="absolute top-2 left-8"
+      style="font-family: var(--font-technical); font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--riso-teal); opacity: 0.7;"
+    >
+      {label}
+    </div>
+  )}
+
+  <div class="riso-frame">
+    <slot />
+  </div>
+
+  <div class="riso-noise"></div>
+</div>

@@ -1,7 +1,8 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import RisoFrame from '../components/RisoFrame.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
@@ -9,121 +10,59 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				max-w: 720px;
-				margin: 0 auto;
-				padding: 3em 1em;
-			}
-			section {
-				margin-bottom: 3rem;
-			}
-			h1 {
-				font-size: 2.5rem;
-				margin-bottom: 0.5rem;
-			}
-			.subtitle {
-				color: #666;
-				font-size: 1.25rem;
-				margin-bottom: 2rem;
-			}
-			.track-record-title {
-				text-transform: uppercase;
-				font-size: 0.85rem;
-				letter-spacing: 0.05em;
-				color: #666;
-				border-bottom: 1px solid #eee;
-				padding-bottom: 0.5rem;
-				margin-bottom: 1.5rem;
-			}
-			.job-entry {
-				margin-bottom: 1.5rem;
-			}
-			.job-entry h3 {
-				margin-bottom: 0.25rem;
-			}
-			.job-meta {
-				font-size: 0.9rem;
-				color: #666;
-				margin-bottom: 0.5rem;
-			}
-			.cta-buttons {
-				display: flex;
-				gap: 1.5rem;
-				align-items: center;
-				margin-top: 1rem;
-			}
-			.btn-primary {
-				background: #111;
-				color: #fff;
-				padding: 0.5rem 1rem;
-				text-decoration: none;
-				border-radius: 4px;
-				font-size: 0.9rem;
-			}
-			.btn-primary:hover {
-				background: #333;
-			}
-			.btn-secondary {
-				color: #666;
-				text-decoration: none;
-				font-size: 0.9rem;
-			}
-			.btn-secondary:hover {
-				color: #111;
-			}
-		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
-			<!-- Hero Section -->
-			<header>
-				<h1>Obaid Ur Rahman</h1>
-				<p class="subtitle">Growth Operations & Strategy</p>
-			</header>
+		<RisoFrame label="FILE 001">
+			<main>
+				<!-- Hero Section -->
+				<header>
+					<h1>Obaid Ur Rahman</h1>
+					<p class="subtitle" style="color: var(--riso-teal); opacity: 0.7; font-size: 1.25rem; margin-bottom: 2rem;">Growth Operations & Strategy</p>
+				</header>
 
-			<!-- What I Do -->
-			<section>
-				<p>
-					I build and optimize the digital sales infrastructure for technical business platforms. As the Operations and Creative Lead at GlyphicX and a growth strategist for enterprise ecosystems, I translate complex software capabilities into clear, high-signal market positioning.
-				</p>
-				<p>
-					My work focuses purely on execution and data integrity—eliminating vague marketing narratives in favor of measurable pipeline performance.
-				</p>
-			</section>
+				<!-- What I Do -->
+				<section>
+					<p>
+						I build and optimize the digital sales infrastructure for technical business platforms. As the Operations and Creative Lead at GlyphicX and a growth strategist for enterprise ecosystems, I translate complex software capabilities into clear, high-signal market positioning.
+					</p>
+					<p>
+						My work focuses purely on execution and data integrity—eliminating vague marketing narratives in favor of measurable pipeline performance.
+					</p>
+				</section>
 
-			<!-- Proven Engagements -->
-			<section>
-				<h2 class="track-record-title">Track Record</h2>
-				
-				<div class="job-entry">
-					<h3>Eaxeesoft (Odoo Consultancy)</h3>
-					<div class="job-meta">Growth Operations & Funnel Strategist</div>
-					<p>Architecting the digital sales infrastructure and growth funnels to scale regional Odoo implementations.</p>
-				</div>
+				<!-- Proven Engagements -->
+				<section>
+					<h2 style="display: inline-block; font-size: 1rem; padding: 0.4rem 0.75rem;">Track Record</h2>
+					
+					<div style="margin-bottom: 1.5rem;">
+						<h3 style="background: transparent; color: var(--riso-teal); border-left: none; padding: 0; font-size: 1.1rem; margin-bottom: 0.25rem;">Eaxeesoft (Odoo Consultancy)</h3>
+						<div style="font-family: var(--font-technical); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--riso-teal); opacity: 0.7; margin-bottom: 0.5rem;">Growth Operations & Funnel Strategist</div>
+						<p>Architecting the digital sales infrastructure and growth funnels to scale regional Odoo implementations.</p>
+					</div>
 
-				<div class="job-entry">
-					<h3>Eaxee (Enterprise Architecture Management)</h3>
-					<div class="job-meta">Creative & Marketing Strategy via GlyphicX</div>
-					<p>Directing the full-stack creative-tech pipeline to communicate high-level EAM value propositions. The platform is deployed at enterprise scale, including Red Sea Global.</p>
-				</div>
-			</section>
+					<div style="margin-bottom: 1.5rem;">
+						<h3 style="background: transparent; color: var(--riso-teal); border-left: none; padding: 0; font-size: 1.1rem; margin-bottom: 0.25rem;">Eaxee (Enterprise Architecture Management)</h3>
+						<div style="font-family: var(--font-technical); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--riso-teal); opacity: 0.7; margin-bottom: 0.5rem;">Creative & Marketing Strategy via GlyphicX</div>
+						<p>Directing the full-stack creative-tech pipeline to communicate high-level EAM value propositions. The platform is deployed at enterprise scale, including Red Sea Global.</p>
+					</div>
+				</section>
 
-			<!-- Clear Call to Action -->
-			<section style="border-top: 1px solid #eee; pt: 2rem;">
-				<h3>Connect</h3>
-				<p style="color: #666; font-size: 0.9rem;">For consulting, operational auditing, or strategic engagements.</p>
-				<div class="cta-buttons">
-					<a href="mailto:your.email@domain.com" class="btn-primary">
-						Email Directly
-					</a>
-					<a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-						LinkedIn →
-					</a>
-				</div>
-			</section>
-		</main>
+				<!-- Clear Call to Action -->
+				<section style="border-top: 1px solid var(--riso-teal); padding-top: 2rem;">
+					<h3 style="background: transparent; color: var(--riso-teal); border-left: none; padding: 0; font-size: 1.1rem;">Connect</h3>
+					<p style="color: var(--riso-teal); opacity: 0.7; font-size: 0.9rem;">For consulting, operational auditing, or strategic engagements.</p>
+					<div style="display: flex; gap: 1.5rem; align-items: center; margin-top: 1rem;">
+						<a href="mailto:your.email@domain.com" style="background: var(--riso-ink); color: var(--riso-paper); padding: 0.5rem 1rem; text-decoration: none; font-family: var(--font-technical); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+							Email Directly
+						</a>
+						<a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" style="color: var(--riso-teal); text-decoration: none; font-family: var(--font-technical); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+							LinkedIn →
+						</a>
+					</div>
+				</section>
+			</main>
+		</RisoFrame>
 		<Footer />
 	</body>
 </html>
