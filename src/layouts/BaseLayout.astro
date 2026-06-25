@@ -1,0 +1,107 @@
+---
+import { siteConfig } from "../config/site";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import RisoFrame from "../components/RisoFrame.astro";
+import JsonLd from "../components/JsonLd.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Optional label shown in the RisoFrame header, e.g., "FILE 003 · TRACK RECORD" */
+  frameLabel?: string;
+  /** If true, renders without the RisoFrame wrapper */
+  bare?: boolean;
+  /** JSON-LD structured data, if any */
+  jsonLd?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description,
+  frameLabel,
+  bare = false,
+  jsonLd,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, siteConfig.canonicalBaseUrl).toString();
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteConfig.name,
+  url: siteConfig.canonicalBaseUrl,
+  email: siteConfig.email,
+  jobTitle: siteConfig.tagline ?? undefined,
+  description: [siteConfig.tagline, siteConfig.subTagline].filter(Boolean).join(". "),
+  sameAs: [
+    siteConfig.social.linkedin,
+    siteConfig.social.github,
+    siteConfig.social.twitter,
+    siteConfig.social.mastodon,
+  ].filter(Boolean),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={siteConfig.name}
+      href={`${siteConfig.canonicalBaseUrl}/rss.xml`}
+    />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:image" content={`${siteConfig.canonicalBaseUrl}/og-default.png`} />
+    <meta property="og:site_name" content={siteConfig.name} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={`${siteConfig.canonicalBaseUrl}/og-default.png`} />
+
+    <!-- Risograph type stack -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- JSON-LD Person Schema (site-wide) -->
+    <JsonLd data={personSchema} />
+    {jsonLd && <JsonLd data={jsonLd} />}
+  </head>
+  <body>
+    <Header />
+    <main>
+      {bare ? (
+        <slot />
+      ) : (
+        <RisoFrame label={frameLabel}>
+          <slot />
+        </RisoFrame>
+      )}
+    </main>
+    <Footer />
+  </body>
+</html>

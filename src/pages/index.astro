@@ -1,31 +1,18 @@
 ---
-import { siteConfig } from "../config/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import RisoFrame from "../components/RisoFrame.astro";
 import Hero from "../components/Hero.astro";
 import TrackRecord from "../components/TrackRecord.astro";
 import ConversionTracks from "../components/ConversionTracks.astro";
-import RisoFrame from "../components/RisoFrame.astro";
-import "../styles/global.css";
+import { siteConfig } from "../config/site";
+
+const title = `${siteConfig.name} - ${siteConfig.tagline}`.trim();
+const description = [siteConfig.tagline, siteConfig.subTagline].filter(Boolean).join(". ");
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{siteConfig.name} - {siteConfig.tagline}</title>
-    <meta name="description" content={`${siteConfig.tagline}. ${siteConfig.subTagline}`} />
-    <link rel="canonical" href={siteConfig.canonicalBaseUrl} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <Hero />
-    <RisoFrame label="FILE 003 · TRACK RECORD">
-      <TrackRecord />
-      <ConversionTracks />
-    </RisoFrame>
-  </body>
-</html>
+<BaseLayout title={title} description={description}>
+  <Hero />
+  <RisoFrame label="FILE 003 · TRACK RECORD">
+    <TrackRecord />
+    <ConversionTracks />
+  </RisoFrame>
+</BaseLayout>

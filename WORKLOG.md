@@ -59,9 +59,29 @@ Stage Summary:
 - Vercel preview URL: (pending deployment)
 
 Open items requiring Obaid's input before merge:
-1. Verified tagline (or keep null to maintain guard)
-2. Verified subTagline (or keep null to maintain guard)
-3. Per-track-record-entry: context, action, result, tags (or remove entries entirely)
-4. Role dropdown options / audit subtitle / briefing subtitle
-5. Scheduling URL + duration
-6. All REPLACE_ME values (email, LinkedIn, Formspree ID)
+1. ~~Verified tagline~~ ✅ DONE
+2. ~~Verified subTagline~~ ✅ DONE
+3. ~~Per-track-record-entry~~ ✅ DONE (Academix + Eaxee verified, Red Sea Global removed)
+4. ~~Role dropdown options~~ ✅ DONE (kept as-is per Obaid)
+5. Scheduling URL + duration — Obaid to provide when ready
+6. Formspree form ID — Obaid to provide when ready
+
+---
+Task ID: intake-port-003b
+Agent: hermes
+Task: Port Obaid's verified content from intake form into siteConfig and components.
+
+Work Log:
+- Read obaid-intake-completed.md from Downloads
+- Ported all verified values into src/config/site.ts
+- Updated Hero.astro, TrackRecord.astro, ConversionTracks.astro to use new config
+- Production build: PASS (all 4 guards satisfied)
+- Both track record entries verified by Obaid
+- Red Sea Global removed per Obaid's instruction
+- Form/scheduling fields set to null (Obaid marked DEFER)
+
+Stage Summary:
+- Production build status: ✅ PASSING
+- Verified entries: 2 (Academix, Eaxee)
+- Blog posts: 2 (governance-audit-stage-2, the-hybrid-ai-stack — both MINE)
+- PR URL: https://github.com/diabo205/operations-blog/pull/new/fix/strip-fabricated-content

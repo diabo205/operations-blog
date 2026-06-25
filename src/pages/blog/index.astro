@@ -1,92 +1,78 @@
 ---
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import RisoFrame from "../../components/RisoFrame.astro";
 import { siteConfig } from "../../config/site";
-import "../../styles/global.css";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const title = `Writing - ${siteConfig.name}`;
+const description = "Technical structural breakdowns on data integrity, CRM integrations, and enterprise architecture sales pipelines.";
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Writing - {siteConfig.name}</title>
-    <meta name="description" content="Technical structural breakdowns on data integrity, CRM integrations, and enterprise architecture sales pipelines." />
-    <link rel="canonical" href={`${siteConfig.canonicalBaseUrl}/blog`} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <RisoFrame label="FILE 002 · WRITING INDEX">
-      <h1>Writing</h1>
-      <p style="font-family: var(--font-technical); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-riso-teal); opacity: 0.7; margin-bottom: 2rem;">
-        Technical structural breakdowns · {posts.length} entries
-      </p>
-      {posts.length === 0 ? (
-        <p class="empty-state">
-          No posts yet. Writing is in progress. Check back later or subscribe to the RSS feed.
-        </p>
-      ) : (
-        <ul class="post-list">
-          {posts.map((post) => (
-            <li class="post-item">
-              <a href={`/blog/${post.id}/`}>
-                <h2 class="post-title">{post.data.title}</h2>
-                <p class="post-meta">
-                  <time datetime={post.data.pubDate.toISOString()}>
-                    {post.data.pubDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-                  </time>
-                  {post.data.tags && post.data.tags.length > 0 && (
-                    <span class="post-tags"> · {post.data.tags.join(" · ")}</span>
-                  )}
-                </p>
-                <p class="post-description">{post.data.description}</p>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </RisoFrame>
-    <style>
-      .post-list { list-style: none; padding: 0; margin: 2rem 0; }
-      .post-item { border-bottom: 1px solid var(--color-riso-teal); padding: 1.5rem 0; }
-      .post-item:last-child { border-bottom: none; }
-      .post-item a { text-decoration: none; color: inherit; display: block; }
-      .post-item a:hover .post-title { color: var(--color-riso-vermilion); }
-      .post-title {
-        font-size: 1.5rem;
-        background: transparent;
-        color: var(--color-riso-teal);
-        border-left: none;
-        padding: 0;
-        margin: 0 0 0.5rem;
-      }
-      .post-meta {
-        font-family: var(--font-technical);
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--color-riso-teal);
-        opacity: 0.7;
-        margin-bottom: 0.5rem;
-      }
-      .post-description { color: var(--color-riso-ink); margin: 0; }
-      .empty-state {
-        font-family: var(--font-technical);
-        font-size: 0.9rem;
-        color: var(--color-riso-teal);
-        opacity: 0.7;
-        padding: 2rem 0;
-        border: 1px dashed var(--color-riso-teal);
-        text-align: center;
-      }
-    </style>
-  </body>
-</html>
+<BaseLayout title={title} description={description} frameLabel="FILE 002 · WRITING INDEX">
+  <h1>Writing</h1>
+  <p style="font-family: var(--font-technical); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-riso-teal); opacity: 0.7; margin-bottom: 2rem;">
+    Technical structural breakdowns · {posts.length} entries
+  </p>
+
+  {posts.length === 0 ? (
+    <p class="empty-state">
+      No posts yet. Writing is in progress. Check back later or subscribe to the RSS feed.
+    </p>
+  ) : (
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li class="post-item">
+          <a href={`/blog/${post.id}/`}>
+            <h2 class="post-title">{post.data.title}</h2>
+            <p class="post-meta">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+              </time>
+              {post.data.tags.length > 0 && (
+                <span class="post-tags"> · {post.data.tags.join(" · ")}</span>
+              )}
+            </p>
+            <p class="post-description">{post.data.description}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</BaseLayout>
+
+<style>
+  .post-list { list-style: none; padding: 0; margin: 2rem 0; }
+  .post-item { border-bottom: 1px solid var(--color-riso-teal); padding: 1.5rem 0; }
+  .post-item:last-child { border-bottom: none; }
+  .post-item a { text-decoration: none; color: inherit; display: block; }
+  .post-item a:hover .post-title { color: var(--color-riso-vermilion); }
+  .post-title {
+    font-size: 1.5rem;
+    background: transparent;
+    color: var(--color-riso-teal);
+    border-left: none;
+    padding: 0;
+    margin: 0 0 0.5rem;
+  }
+  .post-meta {
+    font-family: var(--font-technical);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-riso-teal);
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+  }
+  .post-description { color: var(--color-riso-ink); margin: 0; }
+  .empty-state {
+    font-family: var(--font-technical);
+    font-size: 0.9rem;
+    color: var(--color-riso-teal);
+    opacity: 0.7;
+    padding: 2rem 0;
+    border: 1px dashed var(--color-riso-teal);
+    text-align: center;
+  }
+</style>
