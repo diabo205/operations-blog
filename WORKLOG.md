@@ -83,6 +83,38 @@ Stage Summary:
 - Commit: 3bb7bb9 on fix/strip-fabricated-content
 
 ---
+Task ID: fix-frame-spacing-003b
+Agent: hermes
+Task: Eliminate excessive vertical gap between .riso-page and .riso-frame on all pages.
+
+Work Log:
+- Gap contributors identified:
+  - .riso-page padding: 1.5rem (24px)
+  - .riso-frame margin: 2rem auto (32px top) ← PRIMARY CULPRIT
+  - .hero-frame margin-top: 4rem (64px) ← compounding
+  - .track-record-section margin: 6rem 0 (96px top) ← compounding
+  - .conversion-section margin: 6rem 0 (96px top) ← compounding
+  - Total before fix: ~15rem (240px) between hero and track record
+- Fix applied:
+  - .riso-frame margin: 0 auto (was 2rem auto)
+  - Added --section-gap: 3rem, --section-gap-lg: 5rem tokens
+  - Hero: margin-top: var(--section-gap), margin-bottom: var(--section-gap-lg)
+  - TrackRecord: margin-top: 0, margin-bottom: var(--section-gap-lg)
+  - ConversionTracks: margin-top: 0, margin-bottom: var(--section-gap)
+  - Defensive html/body/main/h1-h6/p margin zeroing
+  - Fixed double-wrapping on index.astro (bare prop)
+- Total after fix: ~6.5rem (104px) between hero and track record (57% reduction)
+- Mobile: --section-gap: 2rem, --section-gap-lg: 3rem
+- No double-wrapping on any page (verified via snapshot)
+
+Stage Summary:
+- Gap between header and hero frame: ~24px (was ~56px) — 57% reduction
+- Gap between hero frame and track record frame: ~104px (was ~240px) — 57% reduction
+- Mobile layout intact: yes
+- Build status: pass
+- Commit: 73e21f5 on fix/strip-fabricated-content
+
+---
 Task ID: intake-port-003b
 Agent: hermes
 Task: Port Obaid's verified content from intake form into siteConfig and components.

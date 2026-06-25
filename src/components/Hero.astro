@@ -3,7 +3,7 @@ import { siteConfig } from "../config/site";
 import RisoFrame from "./RisoFrame.astro";
 ---
 
-<section class="riso-page" id="top">
+<section class="hero-section" id="top">
   <div class="riso-frame hero-frame">
     <p class="hero-eyebrow">
       Positioning · Last revised {new Date().toISOString().slice(0, 10)}
@@ -30,9 +30,14 @@ import RisoFrame from "./RisoFrame.astro";
 </section>
 
 <style>
+  .hero-section {
+    background-color: var(--color-riso-paper);
+    padding-top: var(--section-gap);
+    padding-bottom: 0;
+  }
   .hero-frame {
     max-width: 64rem;
-    margin-top: var(--section-gap);
+    margin-top: 0;
     margin-bottom: var(--section-gap-lg);
   }
   .hero-eyebrow {
