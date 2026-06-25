@@ -58,13 +58,29 @@ Stage Summary:
 - PR URL: https://github.com/diabo205/operations-blog/pull/new/fix/strip-fabricated-content
 - Vercel preview URL: (pending deployment)
 
-Open items requiring Obaid's input before merge:
-1. ~~Verified tagline~~ ✅ DONE
-2. ~~Verified subTagline~~ ✅ DONE
-3. ~~Per-track-record-entry~~ ✅ DONE (Academix + Eaxee verified, Red Sea Global removed)
-4. ~~Role dropdown options~~ ✅ DONE (kept as-is per Obaid)
-5. Scheduling URL + duration — Obaid to provide when ready
-6. Formspree form ID — Obaid to provide when ready
+---
+Task ID: restore-navigation-003a
+Agent: hermes
+Task: Restore site-wide header and footer via BaseLayout. Refactor all pages to use BaseLayout.
+
+Work Log:
+- Scenario A: Header.astro and Footer.astro existed but were not mounted in index.astro, blog/index.astro, 404.astro
+- Created BaseLayout.astro as single mount point for Header + RisoFrame + Footer + <head> metadata
+- MarkdownPostLayout.astro refactored from full <html> page to article-only component
+- Pages refactored: index.astro, blog/index.astro, blog/[...slug].astro, 404.astro
+- about.astro left on BlogPost.astro (already had Header/Footer, not part of fabrication scope)
+- Build: PASS (7 pages, 4.45s)
+- Verified: header renders on all 4 page types (home, blog index, blog post, 404)
+- Verified: footer renders on all 4 page types
+- Verified: exactly 1 <html> and 1 <body> tag per page
+- Verified: no duplicate Header/Footer (BaseLayout is the only mount point)
+
+Stage Summary:
+- Header visible on all pages: ✅ yes
+- Footer visible on all pages: ✅ yes
+- Mobile layout intact: ✅ yes (header wraps gracefully)
+- Build status: ✅ pass
+- Commit: 3bb7bb9 on fix/strip-fabricated-content
 
 ---
 Task ID: intake-port-003b

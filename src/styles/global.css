@@ -261,8 +261,38 @@ li { margin-bottom: 0.4rem; text-align: left; }
 }
 
 /* ============================================================
-   TECHNICAL PRINT FRAME
+   TECHNICAL PRINT FRAME — global page wrapper
    ============================================================ */
+
+:root {
+  --section-gap: 3rem;
+  --section-gap-lg: 5rem;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --section-gap: 2rem;
+    --section-gap-lg: 3rem;
+  }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
 
 .riso-page {
   background-color: var(--riso-paper);
@@ -276,7 +306,9 @@ li { margin-bottom: 0.4rem; text-align: left; }
 .riso-frame {
   border: 1px solid var(--riso-teal);
   max-width: 56rem;
-  margin: 2rem auto;
+  /* CHANGED: was `margin: 2rem auto` — the 2rem top/bottom was compounding
+     with .riso-page padding and section margins. Now zero vertical margin. */
+  margin: 0 auto;
   padding: 2rem;
   position: relative;
   background-color: var(--riso-paper);
@@ -328,7 +360,7 @@ li { margin-bottom: 0.4rem; text-align: left; }
 
 @media (max-width: 640px) {
   .riso-page { padding: 0.75rem; }
-  .riso-frame { padding: 1.25rem; margin: 1rem auto; }
+  .riso-frame { padding: 1.25rem; margin: 0 auto; }
   h2 { padding: 0.6rem 0.75rem; }
   h3 { padding: 0.4rem 0.6rem; }
   pre { padding: 1rem; font-size: 0.8rem; }

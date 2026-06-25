@@ -9,7 +9,7 @@ import { siteConfig } from "../config/site";
 const title = `${siteConfig.name} - ${siteConfig.tagline}`.trim();
 const description = [siteConfig.tagline, siteConfig.subTagline].filter(Boolean).join(". ");
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} bare>
   <Hero />
   <RisoFrame label="FILE 003 · TRACK RECORD">
     <TrackRecord />
