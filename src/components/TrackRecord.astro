@@ -1,0 +1,133 @@
+---
+import { siteConfig } from "../config/site";
+---
+<section id="track-record" class="track-record-section">
+  <h2 class="section-heading">Track Record</h2>
+  <p class="section-intro">
+    Three engagements where technical architecture was repositioned as a
+    commercial asset. Each entry uses a Context · Action · Result structure
+    so the buyer can audit the methodology, not just the outcome.
+  </p>
+
+  <div class="case-grid">
+    {siteConfig.trackRecord.map((entry, i) => (
+      <article class="case-card">
+        <header class="case-card-header">
+          <span class="case-index">{String(i + 1).padStart(2, "0")}</span>
+          <h3 class="case-client">{entry.client}</h3>
+        </header>
+        <div class="case-body">
+          <div class="case-block">
+            <span class="case-label">Context</span>
+            <p>{entry.context}</p>
+          </div>
+          <div class="case-block">
+            <span class="case-label">Action</span>
+            <p>{entry.action}</p>
+          </div>
+          <div class="case-block case-result-block">
+            <span class="case-label case-result-label">Result</span>
+            <p>{entry.result ?? "Metric pending verification."}</p>
+          </div>
+        </div>
+        <footer class="case-tags">
+          {entry.tags.map((tag) => <span class="case-tag">{tag}</span>)}
+        </footer>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .track-record-section { margin: 6rem 0; }
+  .section-heading {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+  }
+  .section-intro {
+    max-width: 48rem;
+    color: var(--color-riso-ink);
+    margin-bottom: 3rem;
+  }
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .case-card {
+    border: 2px solid var(--color-riso-teal);
+    background-color: var(--color-riso-paper);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .case-card-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-riso-teal);
+  }
+  .case-index {
+    font-family: var(--font-technical);
+    font-size: 0.75rem;
+    color: var(--color-riso-teal);
+    opacity: 0.6;
+  }
+  .case-client {
+    background: transparent;
+    color: var(--color-riso-teal);
+    font-family: var(--font-clinical);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    border-left: none;
+    padding: 0;
+    margin: 0;
+  }
+  .case-body { flex: 1; }
+  .case-block { margin-bottom: 1rem; }
+  .case-label {
+    display: block;
+    font-family: var(--font-technical);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-riso-teal);
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+  }
+  .case-block p {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .case-result-block {
+    background-color: rgba(243, 193, 55, 0.15);
+    padding: 0.75rem;
+    border-left: 3px solid var(--color-riso-vermilion);
+    margin-top: 0.5rem;
+  }
+  .case-result-label { color: var(--color-riso-vermilion); opacity: 1; }
+  .case-result-block p {
+    font-weight: 600;
+    color: var(--color-riso-teal);
+  }
+  .case-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(26, 75, 94, 0.3);
+  }
+  .case-tag {
+    font-family: var(--font-technical);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--color-riso-teal);
+    color: var(--color-riso-teal);
+  }
+</style>

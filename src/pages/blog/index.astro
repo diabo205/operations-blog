@@ -1,118 +1,77 @@
 ---
-import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
-import Header from '../../components/Header.astro';
-import RisoFrame from '../../components/RisoFrame.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { getCollection } from "astro:content";
+import RisoFrame from "../../components/RisoFrame.astro";
+import { siteConfig } from "../../config/site";
+import "../../styles/global.css";
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
-
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li a {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border: 1px solid var(--riso-teal);
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: var(--riso-teal);
-				line-height: 1;
-				font-family: var(--font-clinical);
-				text-transform: uppercase;
-			}
-			.date {
-				margin: 0;
-				color: var(--riso-teal);
-				opacity: 0.7;
-				font-family: var(--font-technical);
-				font-size: 0.75rem;
-				letter-spacing: 0.05em;
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: var(--riso-vermilion);
-			}
-			ul li a:hover img {
-				border-color: var(--riso-vermilion);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<RisoFrame label="BLOG INDEX">
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</RisoFrame>
-		<Footer />
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Writing - {siteConfig.name}</title>
+    <meta name="description" content="Technical structural breakdowns on data integrity, CRM integrations, and enterprise architecture sales pipelines." />
+    <link rel="canonical" href={`${siteConfig.canonicalBaseUrl}/blog`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <RisoFrame label="FILE 002 · WRITING INDEX">
+      <h1>Writing</h1>
+      <p style="font-family: var(--font-technical); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-riso-teal); opacity: 0.7; margin-bottom: 2rem;">
+        Technical structural breakdowns · {posts.length} entries
+      </p>
+      <ul class="post-list">
+        {posts.map((post) => (
+          <li class="post-item">
+            <a href={`/blog/${post.id}/`}>
+              <h2 class="post-title">{post.data.title}</h2>
+              <p class="post-meta">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {post.data.pubDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                </time>
+                {post.data.tags.length > 0 && (
+                  <span class="post-tags"> · {post.data.tags.join(" · ")}</span>
+                )}
+              </p>
+              <p class="post-description">{post.data.description}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </RisoFrame>
+    <style>
+      .post-list { list-style: none; padding: 0; margin: 2rem 0; }
+      .post-item { border-bottom: 1px solid var(--color-riso-teal); padding: 1.5rem 0; }
+      .post-item:last-child { border-bottom: none; }
+      .post-item a { text-decoration: none; color: inherit; display: block; }
+      .post-item a:hover .post-title { color: var(--color-riso-vermilion); }
+      .post-title {
+        font-size: 1.5rem;
+        background: transparent;
+        color: var(--color-riso-teal);
+        border-left: none;
+        padding: 0;
+        margin: 0 0 0.5rem;
+      }
+      .post-meta {
+        font-family: var(--font-technical);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--color-riso-teal);
+        opacity: 0.7;
+        margin-bottom: 0.5rem;
+      }
+      .post-description { color: var(--color-riso-ink); margin: 0; }
+    </style>
+  </body>
 </html>

@@ -1,68 +1,31 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import RisoFrame from '../components/RisoFrame.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { siteConfig } from "../config/site";
+import Hero from "../components/Hero.astro";
+import TrackRecord from "../components/TrackRecord.astro";
+import ConversionTracks from "../components/ConversionTracks.astro";
+import RisoFrame from "../components/RisoFrame.astro";
+import "../styles/global.css";
 ---
-
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<RisoFrame label="FILE 001">
-			<main>
-				<!-- Hero Section -->
-				<header>
-					<h1>Obaid Ur Rahman</h1>
-					<p class="subtitle" style="color: var(--riso-teal); opacity: 0.7; font-size: 1.25rem; margin-bottom: 2rem;">Growth Operations & Strategy</p>
-				</header>
-
-				<!-- What I Do -->
-				<section>
-					<p>
-						I build and optimize the digital sales infrastructure for technical business platforms. As the Operations and Creative Lead at GlyphicX and a growth strategist for enterprise ecosystems, I translate complex software capabilities into clear, high-signal market positioning.
-					</p>
-					<p>
-						My work focuses purely on execution and data integrity—eliminating vague marketing narratives in favor of measurable pipeline performance.
-					</p>
-				</section>
-
-				<!-- Proven Engagements -->
-				<section>
-					<h2 style="display: inline-block; font-size: 1rem; padding: 0.4rem 0.75rem;">Track Record</h2>
-					
-					<div style="margin-bottom: 1.5rem;">
-						<h3 style="background: transparent; color: var(--riso-teal); border-left: none; padding: 0; font-size: 1.1rem; margin-bottom: 0.25rem;">Eaxeesoft (Odoo Consultancy)</h3>
-						<div style="font-family: var(--font-technical); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--riso-teal); opacity: 0.7; margin-bottom: 0.5rem;">Growth Operations & Funnel Strategist</div>
-						<p>Architecting the digital sales infrastructure and growth funnels to scale regional Odoo implementations.</p>
-					</div>
-
-					<div style="margin-bottom: 1.5rem;">
-						<h3 style="background: transparent; color: var(--riso-teal); border-left: none; padding: 0; font-size: 1.1rem; margin-bottom: 0.25rem;">Eaxee (Enterprise Architecture Management)</h3>
-						<div style="font-family: var(--font-technical); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--riso-teal); opacity: 0.7; margin-bottom: 0.5rem;">Creative & Marketing Strategy via GlyphicX</div>
-						<p>Directing the full-stack creative-tech pipeline to communicate high-level EAM value propositions. The platform is deployed at enterprise scale, including Red Sea Global.</p>
-					</div>
-				</section>
-
-				<!-- Clear Call to Action -->
-				<section style="border-top: 1px solid var(--riso-teal); padding-top: 2rem;">
-					<h3 style="background: transparent; color: var(--riso-teal); border-left: none; padding: 0; font-size: 1.1rem;">Connect</h3>
-					<p style="color: var(--riso-teal); opacity: 0.7; font-size: 0.9rem;">For consulting, operational auditing, or strategic engagements.</p>
-					<div style="display: flex; gap: 1.5rem; align-items: center; margin-top: 1rem;">
-						<a href="mailto:your.email@domain.com" style="background: var(--riso-ink); color: var(--riso-paper); padding: 0.5rem 1rem; text-decoration: none; font-family: var(--font-technical); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
-							Email Directly
-						</a>
-						<a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" style="color: var(--riso-teal); text-decoration: none; font-family: var(--font-technical); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
-							LinkedIn →
-						</a>
-					</div>
-				</section>
-			</main>
-		</RisoFrame>
-		<Footer />
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{siteConfig.name} - {siteConfig.tagline}</title>
+    <meta name="description" content={`${siteConfig.tagline}. ${siteConfig.subTagline}`} />
+    <link rel="canonical" href={siteConfig.canonicalBaseUrl} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Hero />
+    <RisoFrame label="FILE 003 · TRACK RECORD">
+      <TrackRecord />
+      <ConversionTracks />
+    </RisoFrame>
+  </body>
 </html>

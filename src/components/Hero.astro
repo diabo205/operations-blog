@@ -1,0 +1,115 @@
+---
+import { siteConfig } from "../config/site";
+import RisoFrame from "./RisoFrame.astro";
+---
+
+<section class="riso-page" id="top">
+  <div class="riso-frame hero-frame">
+    <!-- Eyebrow: technical / mono - establishes the print-manual vibe -->
+    <p class="hero-eyebrow">
+      File 001 · Positioning Statement · Last revised {new Date().toISOString().slice(0, 10)}
+    </p>
+
+    <!-- Primary identity: cream paper, teal clinical headline (per Phase 1 spec) -->
+    <h1 class="hero-title">
+      {siteConfig.name} builds the digital sales infrastructure for technical
+      business platforms.
+    </h1>
+
+    <!-- Sub-headline: explicit commercial outcome, in dark variant block -->
+    <div class="hero-subheadline-block">
+      <p class="hero-subheadline">
+        {siteConfig.subTagline}
+      </p>
+    </div>
+
+    <!-- Dual CTAs (will be re-pointed in Step 5) -->
+    <div class="hero-ctas">
+      <a class="cta-primary" href="#track-a">Request Infrastructure Audit</a>
+      <a class="cta-secondary" href="#track-b">Schedule Enterprise Briefing</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-frame {
+    max-width: 64rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-technical);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-riso-teal);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    color: var(--color-riso-teal);
+    font-size: clamp(2.25rem, 6vw, 4.25rem);
+    margin-bottom: 2rem;
+    max-width: 22ch;
+  }
+  .hero-subheadline-block {
+    background-color: var(--color-riso-ink);
+    color: var(--color-riso-cream);
+    border-left: 6px solid var(--color-riso-electric);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0 2.5rem;
+    max-width: 48rem;
+  }
+  .hero-subheadline {
+    font-family: var(--font-body);
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    line-height: 1.5;
+    color: var(--color-riso-cream);
+    margin: 0;
+  }
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .cta-primary,
+  .cta-secondary {
+    font-family: var(--font-clinical);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+  }
+  .cta-primary {
+    background-color: var(--color-riso-vermilion);
+    color: var(--color-riso-paper);
+    border: 2px solid var(--color-riso-vermilion);
+  }
+  .cta-primary:hover {
+    background-color: transparent;
+    color: var(--color-riso-vermilion);
+  }
+  .cta-secondary {
+    background-color: transparent;
+    color: var(--color-riso-teal);
+    border: 2px solid var(--color-riso-teal);
+  }
+  .cta-secondary:hover {
+    background-color: var(--color-riso-teal);
+    color: var(--color-riso-paper);
+  }
+  .cta-primary:focus-visible,
+  .cta-secondary:focus-visible {
+    outline: 3px solid var(--color-riso-electric);
+    outline-offset: 3px;
+  }
+  @media (max-width: 640px) {
+    .hero-ctas { flex-direction: column; align-items: stretch; }
+    .cta-primary, .cta-secondary { text-align: center; }
+  }
+</style>

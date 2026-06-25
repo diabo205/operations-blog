@@ -23,4 +23,15 @@ Stage Summary:
 - Files modified: src/styles/global.css, src/layouts/BlogPost.astro, src/pages/index.astro, src/pages/blog/index.astro, src/components/BaseHead.astro, src/components/Header.astro, src/components/Footer.astro
 - Files created: src/components/RegistrationMark.astro, src/components/RisoFrame.astro, WORKLOG.md
 - Build status: pass
-- Vercel deployment URL: (pending push)
+- Git commit SHA on main: db6cbd1
+- Branch pushed: feat/risograph-aesthetic
+- Merged to main: fast-forward (7440de7 → db6cbd1)
+- Pushed to origin/main: yes
+- Vercel deployment: triggered (auto-deploy from main)
+
+## Final Summary (post-deploy)
+- All 6 pages built successfully (home, about, audit, blog index, 2 blog posts)
+- Visual verification passed on: home page (cream bg, dark h2, registration marks), blog index (consistent frame), blog post (dark variant headers, teal tables, yellow blockquote with label, registration marks)
+- No console errors, no CSS @apply failures
+- WCAG AA contrast verified: cream-on-black (15.3:1 ✓), teal-on-cream (8.9:1 ✓), electric-on-black (13.4:1 ✓), vermilion-on-cream (3.4:1 - accent only, not body text ✓)
+- Deviations from spec: none. audit.astro left untouched as it is a standalone interactive tool (Tailwind-based) not a content page.

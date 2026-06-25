@@ -1,20 +1,35 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import BlogPost from "../../layouts/BlogPost.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import { siteConfig } from "../../config/site";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
 }
-type Props = CollectionEntry<'blog'>;
+
+type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
 const { Content } = await render(post);
----
 
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: { "@type": "Person", name: siteConfig.name, url: siteConfig.canonicalBaseUrl },
+  publisher: { "@type": "Person", name: siteConfig.name, url: siteConfig.canonicalBaseUrl },
+  mainEntityOfPage: `${siteConfig.canonicalBaseUrl}/blog/${post.id}/`,
+};
+---
+<JsonLd data={articleSchema} />
 <BlogPost {...post.data}>
-	<Content />
+  <Content />
 </BlogPost>

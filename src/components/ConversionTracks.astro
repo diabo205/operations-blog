@@ -1,0 +1,221 @@
+---
+import { siteConfig } from "../config/site";
+
+const formspreeAction = `https://formspree.io/f/${siteConfig.forms.formspreeFormId}`;
+const scheduleUrl = siteConfig.scheduling.url;
+---
+<section class="conversion-section">
+  <h2 class="section-heading">Two ways to engage</h2>
+  <p class="section-intro">
+    Whether you are validating technical fit or scheduling a strategic
+    briefing, pick the track that matches your role and decision timeline.
+  </p>
+
+  <div class="tracks-grid">
+    <!-- TRACK A - Technical/Operational -->
+    <div class="track track-a" id="track-a">
+      <header class="track-header">
+        <span class="track-tag">Track A · Technical</span>
+        <h3 class="track-title">Request an Infrastructure Audit</h3>
+        <p class="track-subtitle">
+          For technical architects, CIOs, and operations leads who want a
+          structured assessment of their current CRM, ERP, or EAM pipeline.
+        </p>
+      </header>
+
+      <form class="audit-form" action={formspreeAction} method="POST">
+        <div class="form-row">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-row">
+          <label for="email">Work email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-row">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" required />
+        </div>
+        <div class="form-row">
+          <label for="role">Role</label>
+          <select id="role" name="role" required>
+            <option value="">Select.</option>
+            <option value="cio">CIO / CTO</option>
+            <option value="architect">Enterprise Architect</option>
+            <option value="ops">Head of Operations</option>
+            <option value="growth">Head of Growth</option>
+            <option value="partner">Partner / Principal</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="stack">Current tech stack & pipeline bottlenecks</label>
+          <textarea id="stack" name="stack" rows="4" required
+            placeholder="e.g., Odoo 16 + HubSpot; lead routing is manual, sync drift on custom fields"></textarea>
+        </div>
+        <!-- Honeypot -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+        <button type="submit" class="cta-primary">Submit audit request</button>
+        <p class="form-fineprint">
+          You will receive a structured response within 2 business days. No
+          sales calls unless you request one.
+        </p>
+      </form>
+    </div>
+
+    <!-- TRACK B - Executive/Strategic -->
+    <div class="track track-b" id="track-b">
+      <header class="track-header">
+        <span class="track-tag">Track B · Executive</span>
+        <h3 class="track-title">Schedule an Enterprise Briefing</h3>
+        <p class="track-subtitle">
+          For CEOs, COOs, and Partners evaluating whether to engage at the
+          strategic consulting tier. 45-minute structured call.
+        </p>
+      </header>
+
+      <div class="briefing-body">
+        <ul class="briefing-agenda">
+          <li>Current positioning vs. architectural reality (10 min)</li>
+          <li>Pipeline velocity diagnostics (15 min)</li>
+          <li>Engagement scoping & commercial tiers (15 min)</li>
+          <li>Q&A and next steps (5 min)</li>
+        </ul>
+        <a href={scheduleUrl} class="cta-primary schedule-cta" target="_blank" rel="noopener noreferrer">
+          Open scheduling · {siteConfig.scheduling.provider}
+        </a>
+        <p class="form-fineprint">
+          Calendar opens in a new tab. Pick a slot; you will receive a
+          calendar invite with a prep brief.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .conversion-section { margin: 6rem 0; }
+  .section-heading { font-size: clamp(1.75rem, 4vw, 3rem); }
+  .section-intro { max-width: 48rem; margin-bottom: 3rem; }
+  .tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 2rem;
+  }
+  .track {
+    border: 2px solid var(--color-riso-teal);
+    background-color: var(--color-riso-paper);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .track-b {
+    border-color: var(--color-riso-vermilion);
+  }
+  .track-header { margin-bottom: 1.5rem; }
+  .track-tag {
+    font-family: var(--font-technical);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-riso-teal);
+    opacity: 0.7;
+  }
+  .track-b .track-tag { color: var(--color-riso-vermilion); opacity: 1; }
+  .track-title {
+    background: transparent;
+    color: var(--color-riso-teal);
+    border-left: none;
+    padding: 0;
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+  }
+  .track-subtitle {
+    font-size: 0.9rem;
+    color: var(--color-riso-ink);
+    margin: 0;
+  }
+
+  /* ---- Form (Track A) ---- */
+  .audit-form { display: flex; flex-direction: column; gap: 0.875rem; }
+  .form-row { display: flex; flex-direction: column; gap: 0.25rem; }
+  .form-row label {
+    font-family: var(--font-technical);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-riso-teal);
+  }
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--color-riso-teal);
+    background-color: var(--color-riso-paper);
+    color: var(--color-riso-ink);
+    border-radius: 0;
+  }
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus {
+    outline: 2px solid var(--color-riso-electric);
+    outline-offset: 1px;
+    border-color: var(--color-riso-electric);
+  }
+  .cta-primary {
+    font-family: var(--font-clinical);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    background-color: var(--color-riso-vermilion);
+    color: var(--color-riso-paper);
+    border: 2px solid var(--color-riso-vermilion);
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .cta-primary:hover {
+    background-color: transparent;
+    color: var(--color-riso-vermilion);
+  }
+  .schedule-cta {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+  }
+  .form-fineprint {
+    font-size: 0.75rem;
+    color: var(--color-riso-teal);
+    opacity: 0.7;
+    margin-top: 0.5rem;
+  }
+
+  /* ---- Track B body ---- */
+  .briefing-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .briefing-agenda {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    border-top: 1px solid var(--color-riso-teal);
+  }
+  .briefing-agenda li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(26, 75, 94, 0.3);
+    font-size: 0.9rem;
+    color: var(--color-riso-ink);
+  }
+  .schedule-cta { margin-top: auto; }
+
+  @media (max-width: 640px) {
+    .tracks-grid { grid-template-columns: 1fr; }
+    .track { padding: 1.25rem; }
+  }
+</style>

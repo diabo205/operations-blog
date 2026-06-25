@@ -1,0 +1,28 @@
+---
+import RisoFrame from "../components/RisoFrame.astro";
+import { siteConfig } from "../config/site";
+import "../styles/global.css";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>404 - Routing error · {siteConfig.name}</title>
+  </head>
+  <body>
+    <RisoFrame label="FILE 404 · ROUTING ERROR">
+      <p class="font-technical text-xs uppercase tracking-widest" style="color: var(--color-riso-teal); opacity: 0.7; margin-bottom: 1rem;">
+        Error 404 - Path not found in static graph
+      </p>
+      <h1>This route does not resolve.</h1>
+      <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+        The URL you requested is not part of the published site map. This is
+        usually a stale bookmark or a misrouted canonical. Use the navigation
+        above, or return to the home page.
+      </p>
+      <a href="/" class="cta-primary" style="display:inline-block;text-decoration:none; font-family: var(--font-clinical); font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.875rem 1.5rem; font-size: 0.95rem; background-color: var(--color-riso-vermilion); color: var(--color-riso-paper); border: 2px solid var(--color-riso-vermilion);">
+        Return to index
+      </a>
+    </RisoFrame>
+  </body>
+</html>
