@@ -6,26 +6,25 @@
  * import from here - never hardcode these values inline.
  *
  * Every claim-bearing field defaults to null and requires explicit verification
- * by Obaid before shipping to production.
+ * by Obaid before shipping to production. All values below were provided by
+ * Obaid in obaid-intake-completed.md (Phase 3 intake form).
  */
 
 export const siteConfig = {
-  // ---- Identity (low-risk structural fields) ----
+  // ---- Identity (verified by Obaid 2026-06-25) ----
   name: "Obaid Syed",
   domain: "obaidsyed.com",
   canonicalBaseUrl: "https://obaidsyed.com",
+  tagline: "I build evidence-based GTM systems for B2B software companies.",
+  subTagline: "You get a validated ICP, productized offers, and a repeatable system that fills your pipeline.",
 
-  // ---- Claims (MUST be null until Obaid verifies) ----
-  tagline: null as string | null,
-  subTagline: null as string | null,
+  // ---- Contact endpoints (verified by Obaid 2026-06-25) ----
+  email: "obaid@glyphicx.com",
 
-  // ---- Contact endpoints (require REPLACE_ME fill-in before production) ----
-  email: "REPLACE_ME@obaidsyed.com",
-
-  // ---- Social links (only list platforms you actively maintain) ----
+  // ---- Social links (verified by Obaid 2026-06-25) ----
   social: {
-    linkedin: null as string | null,
-    github: "https://github.com/diabo205/operations-blog",
+    linkedin: "https://www.linkedin.com/in/obaidsayyed/",
+    github: "https://github.com/diabo205",
     twitter: null as string | null,
     mastodon: null as string | null,
   },
@@ -42,38 +41,30 @@ export const siteConfig = {
   // ---- Form backend (Track A - Infrastructure Audit) ----
   forms: {
     provider: "formspree" as "formspree" | "netlify" | "vercel",
-    formspreeFormId: "REPLACE_ME",
+    formspreeFormId: null as string | null,
     responseSlaCopy: null as string | null,
     auditSubtitle: null as string | null,
   },
 
-  // ---- Track Record ----
+  // ---- Track Record (verified by Obaid 2026-06-25) ----
   // All entries start as "unverified". Obaid must explicitly move an entry
   // to "verified" and fill in context/action/result before it ships.
   trackRecord: [
     {
-      client: "Eaxeesoft",
-      context: null,
-      action: null,
-      result: null,
-      tags: [],
-      status: "unverified" as const,
+      client: "Academix",
+      context: "Academix needed a defensible total addressable market across its three priority geographies — Pakistan, Saudi Arabia, and UAE — to replace fragmented, manually-unresolvable accreditation data with a governance-classified target list.",
+      action: "Built and ran a multi-stage TAM pipeline (eligibility screening, wave classification, enrollment verification, OBE-relevance filtering) across all three markets, resolving the Pakistan HEC data gap manually where automated sourcing failed.",
+      result: "Delivered a defensible TAM of 185 qualifying institutions across Pakistan, UAE, and Saudi Arabia, classified into 159 Wave 1 (founder-controlled) and 26 Wave 2 (board-governed) targets — giving Academix a verified prospect base to build outreach against. Productization and downstream sales execution remain in progress.",
+      tags: ["TAM Analysis", "Market Sizing", "Governance Classification", "Academix", "Higher Education"],
+      status: "verified" as const,
     },
     {
       client: "Eaxee",
-      context: null,
-      action: null,
-      result: null,
-      tags: [],
-      status: "unverified" as const,
-    },
-    {
-      client: "Red Sea Global",
-      context: null,
-      action: null,
-      result: null,
-      tags: [],
-      status: "unverified" as const,
+      context: "Eaxee needed its website rebuilt to match international B2B SaaS competitors like Ardoq and LeanIX, alongside consistent LinkedIn content production to support enterprise positioning.",
+      action: "Scoped a full website redesign — competitor UI/UX analysis, CMS setup, value-led copywriting, SEO optimisation, CRM-integrated demo funnels — plus a monthly retainer producing 8 LinkedIn posts per cycle; contract signed and build currently in progress.",
+      result: "Engagement signed and active; website redesign and first content retainer cycle are in progress.",
+      tags: ["Website Redesign", "B2B SaaS Positioning", "CMS", "LinkedIn Content", "CRM Integration"],
+      status: "verified" as const,
     },
   ] as Array<{
     client: string;
@@ -90,7 +81,7 @@ export const siteConfig = {
     { label: "Writing", href: "/blog" },
     { label: "Audit", href: "/#track-a" },
     { label: "Briefing", href: "/#track-b" },
-    { label: "Contact", href: "mailto:REPLACE_ME@obaidsyed.com" },
+    { label: "Contact", href: "mailto:obaid@glyphicx.com" },
   ],
 } as const;
 

@@ -1,9 +1,8 @@
 ---
 import { siteConfig } from "../config/site";
 
-const formspreeAction = siteConfig.forms.formspreeFormId !== "REPLACE_ME"
-  ? `https://formspree.io/f/${siteConfig.forms.formspreeFormId}`
-  : null;
+const formspreeId = siteConfig.forms.formspreeFormId;
+const formspreeAction = formspreeId ? `https://formspree.io/f/${formspreeId}` : null;
 const scheduleUrl = siteConfig.scheduling.url;
 ---
 <section class="conversion-section">
@@ -39,6 +38,18 @@ const scheduleUrl = siteConfig.scheduling.url;
           <div class="form-row">
             <label for="company">Company</label>
             <input type="text" id="company" name="company" required />
+          </div>
+          <div class="form-row">
+            <label for="role">Role</label>
+            <select id="role" name="role" required>
+              <option value="">Select.</option>
+              <option value="cio">CIO / CTO</option>
+              <option value="architect">Enterprise Architect</option>
+              <option value="ops">Head of Operations</option>
+              <option value="growth">Head of Growth</option>
+              <option value="partner">Partner / Principal</option>
+              <option value="other">Other</option>
+            </select>
           </div>
           <div class="form-row">
             <label for="stack">Current tech stack & pipeline bottlenecks</label>
@@ -143,6 +154,7 @@ const scheduleUrl = siteConfig.scheduling.url;
     color: var(--color-riso-teal);
   }
   .form-row input,
+  .form-row select,
   .form-row textarea {
     font-family: var(--font-body);
     font-size: 0.95rem;
@@ -153,6 +165,7 @@ const scheduleUrl = siteConfig.scheduling.url;
     border-radius: 0;
   }
   .form-row input:focus,
+  .form-row select:focus,
   .form-row textarea:focus {
     outline: 2px solid var(--color-riso-electric);
     outline-offset: 1px;
