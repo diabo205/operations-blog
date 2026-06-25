@@ -5,25 +5,25 @@ import RisoFrame from "./RisoFrame.astro";
 
 <section class="riso-page" id="top">
   <div class="riso-frame hero-frame">
-    <!-- Eyebrow: technical / mono - establishes the print-manual vibe -->
     <p class="hero-eyebrow">
-      File 001 · Positioning Statement · Last revised {new Date().toISOString().slice(0, 10)}
+      Positioning · Last revised {new Date().toISOString().slice(0, 10)}
     </p>
 
-    <!-- Primary identity: cream paper, teal clinical headline (per Phase 1 spec) -->
     <h1 class="hero-title">
-      {siteConfig.name} builds the digital sales infrastructure for technical
-      business platforms.
+      {siteConfig.name}
+      {siteConfig.tagline ? (
+        <span class="hero-tagline"> — {siteConfig.tagline}</span>
+      ) : (
+        <span class="hero-tagline hero-tagline-missing"> — [Obaid to provide tagline]</span>
+      )}
     </h1>
 
-    <!-- Sub-headline: explicit commercial outcome, in dark variant block -->
-    <div class="hero-subheadline-block">
-      <p class="hero-subheadline">
-        {siteConfig.subTagline}
-      </p>
-    </div>
+    {siteConfig.subTagline && (
+      <div class="hero-subheadline-block">
+        <p class="hero-subheadline">{siteConfig.subTagline}</p>
+      </div>
+    )}
 
-    <!-- Dual CTAs (will be re-pointed in Step 5) -->
     <div class="hero-ctas">
       <a class="cta-primary" href="#track-a">Request Infrastructure Audit</a>
       <a class="cta-secondary" href="#track-b">Schedule Enterprise Briefing</a>
@@ -51,6 +51,19 @@ import RisoFrame from "./RisoFrame.astro";
     font-size: clamp(2.25rem, 6vw, 4.25rem);
     margin-bottom: 2rem;
     max-width: 22ch;
+  }
+  .hero-tagline {
+    font-weight: 500;
+    font-size: 0.6em;
+    display: block;
+    margin-top: 0.25em;
+    letter-spacing: -0.01em;
+  }
+  .hero-tagline-missing {
+    color: var(--color-riso-vermilion);
+    opacity: 0.7;
+    font-style: italic;
+    font-size: 0.5em;
   }
   .hero-subheadline-block {
     background-color: var(--color-riso-ink);

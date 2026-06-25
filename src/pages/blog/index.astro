@@ -29,24 +29,30 @@ const posts = (await getCollection("blog")).sort(
       <p style="font-family: var(--font-technical); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-riso-teal); opacity: 0.7; margin-bottom: 2rem;">
         Technical structural breakdowns · {posts.length} entries
       </p>
-      <ul class="post-list">
-        {posts.map((post) => (
-          <li class="post-item">
-            <a href={`/blog/${post.id}/`}>
-              <h2 class="post-title">{post.data.title}</h2>
-              <p class="post-meta">
-                <time datetime={post.data.pubDate.toISOString()}>
-                  {post.data.pubDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-                </time>
-                {post.data.tags.length > 0 && (
-                  <span class="post-tags"> · {post.data.tags.join(" · ")}</span>
-                )}
-              </p>
-              <p class="post-description">{post.data.description}</p>
-            </a>
-          </li>
-        ))}
-      </ul>
+      {posts.length === 0 ? (
+        <p class="empty-state">
+          No posts yet. Writing is in progress. Check back later or subscribe to the RSS feed.
+        </p>
+      ) : (
+        <ul class="post-list">
+          {posts.map((post) => (
+            <li class="post-item">
+              <a href={`/blog/${post.id}/`}>
+                <h2 class="post-title">{post.data.title}</h2>
+                <p class="post-meta">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                  </time>
+                  {post.data.tags && post.data.tags.length > 0 && (
+                    <span class="post-tags"> · {post.data.tags.join(" · ")}</span>
+                  )}
+                </p>
+                <p class="post-description">{post.data.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </RisoFrame>
     <style>
       .post-list { list-style: none; padding: 0; margin: 2rem 0; }
@@ -72,6 +78,15 @@ const posts = (await getCollection("blog")).sort(
         margin-bottom: 0.5rem;
       }
       .post-description { color: var(--color-riso-ink); margin: 0; }
+      .empty-state {
+        font-family: var(--font-technical);
+        font-size: 0.9rem;
+        color: var(--color-riso-teal);
+        opacity: 0.7;
+        padding: 2rem 0;
+        border: 1px dashed var(--color-riso-teal);
+        text-align: center;
+      }
     </style>
   </body>
 </html>

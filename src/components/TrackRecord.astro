@@ -4,38 +4,48 @@ import { siteConfig } from "../config/site";
 <section id="track-record" class="track-record-section">
   <h2 class="section-heading">Track Record</h2>
   <p class="section-intro">
-    Three engagements where technical architecture was repositioned as a
-    commercial asset. Each entry uses a Context · Action · Result structure
-    so the buyer can audit the methodology, not just the outcome.
+    Engagements where technical architecture was repositioned as a commercial
+    asset. Each entry uses a Context · Action · Result structure.
   </p>
 
-  <div class="case-grid">
-    {siteConfig.trackRecord.map((entry, i) => (
-      <article class="case-card">
-        <header class="case-card-header">
-          <span class="case-index">{String(i + 1).padStart(2, "0")}</span>
-          <h3 class="case-client">{entry.client}</h3>
-        </header>
-        <div class="case-body">
-          <div class="case-block">
-            <span class="case-label">Context</span>
-            <p>{entry.context}</p>
+  {siteConfig.trackRecord.length === 0 ? (
+    <p class="empty-state">
+      No verified engagements yet. Check back later or subscribe to the RSS feed.
+    </p>
+  ) : (
+    <div class="case-grid">
+      {siteConfig.trackRecord.map((entry, i) => (
+        <article class="case-card">
+          <header class="case-card-header">
+            <span class="case-index">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="case-client">{entry.client}</h3>
+            {entry.status === "unverified" && (
+              <span class="status-badge status-unverified">UNVERIFIED</span>
+            )}
+          </header>
+          <div class="case-body">
+            <div class="case-block">
+              <span class="case-label">Context</span>
+              <p>{entry.context ?? <em class="pending">Pending verification</em>}</p>
+            </div>
+            <div class="case-block">
+              <span class="case-label">Action</span>
+              <p>{entry.action ?? <em class="pending">Pending verification</em>}</p>
+            </div>
+            <div class="case-block case-result-block">
+              <span class="case-label case-result-label">Result</span>
+              <p>{entry.result ?? <em class="pending">Pending verification</em>}</p>
+            </div>
           </div>
-          <div class="case-block">
-            <span class="case-label">Action</span>
-            <p>{entry.action}</p>
-          </div>
-          <div class="case-block case-result-block">
-            <span class="case-label case-result-label">Result</span>
-            <p>{entry.result ?? "Metric pending verification."}</p>
-          </div>
-        </div>
-        <footer class="case-tags">
-          {entry.tags.map((tag) => <span class="case-tag">{tag}</span>)}
-        </footer>
-      </article>
-    ))}
-  </div>
+          {entry.tags.length > 0 && (
+            <footer class="case-tags">
+              {entry.tags.map((tag) => <span class="case-tag">{tag}</span>)}
+            </footer>
+          )}
+        </article>
+      ))}
+    </div>
+  )}
 </section>
 
 <style>
@@ -85,6 +95,19 @@ import { siteConfig } from "../config/site";
     padding: 0;
     margin: 0;
   }
+  .status-badge {
+    font-family: var(--font-technical);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 0.15rem 0.4rem;
+    margin-left: auto;
+    border: 1px solid currentColor;
+  }
+  .status-unverified {
+    color: var(--color-riso-vermilion);
+    background-color: rgba(230, 126, 34, 0.1);
+  }
   .case-body { flex: 1; }
   .case-block { margin-bottom: 1rem; }
   .case-label {
@@ -129,5 +152,23 @@ import { siteConfig } from "../config/site";
     padding: 0.2rem 0.5rem;
     border: 1px solid var(--color-riso-teal);
     color: var(--color-riso-teal);
+  }
+  .pending {
+    font-style: italic;
+    color: var(--color-riso-vermilion);
+    opacity: 0.8;
+    font-size: 0.85em;
+  }
+  .empty-state {
+    font-family: var(--font-technical);
+    font-size: 0.9rem;
+    color: var(--color-riso-teal);
+    opacity: 0.7;
+    padding: 2rem 0;
+    border: 1px dashed var(--color-riso-teal);
+    text-align: center;
+  }
+  @media (max-width: 640px) {
+    .case-grid { grid-template-columns: 1fr; }
   }
 </style>
