@@ -1,95 +1,17 @@
 ---
-import { siteConfig } from "../config/site";
-
-const formspreeId = siteConfig.forms.formspreeFormId;
-const formspreeAction = formspreeId ? `https://formspree.io/f/${formspreeId}` : null;
-const scheduleUrl = siteConfig.scheduling.url;
+const email = "obaid@glyphicx.com"
+const phone = "+92 319 2001014"
 ---
 <section class="conversion-section">
-  <h2 class="section-heading">Two ways to engage</h2>
-  <p class="section-intro">
-    Whether you are validating technical fit or scheduling a strategic
-    briefing, pick the track that matches your role and decision timeline.
-  </p>
-
-  <div class="tracks-grid">
-    <!-- TRACK A - Technical/Operational -->
-    <div class="track track-a" id="track-a">
-      <header class="track-header">
-        <span class="track-tag">Track A · Technical</span>
-        <h3 class="track-title">Request an Infrastructure Audit</h3>
-        {siteConfig.forms.auditSubtitle ? (
-          <p class="track-subtitle">{siteConfig.forms.auditSubtitle}</p>
-        ) : (
-          <p class="track-subtitle track-subtitle-missing">[Obaid to provide: who this is for]</p>
-        )}
-      </header>
-
-      {formspreeAction ? (
-        <form class="audit-form" action={formspreeAction} method="POST">
-          <div class="form-row">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required />
-          </div>
-          <div class="form-row">
-            <label for="email">Work email</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <div class="form-row">
-            <label for="company">Company</label>
-            <input type="text" id="company" name="company" required />
-          </div>
-          <div class="form-row">
-            <label for="role">Role</label>
-            <select id="role" name="role" required>
-              <option value="">Select.</option>
-              <option value="cio">CIO / CTO</option>
-              <option value="architect">Enterprise Architect</option>
-              <option value="ops">Head of Operations</option>
-              <option value="growth">Head of Growth</option>
-              <option value="partner">Partner / Principal</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label for="stack">Current tech stack & pipeline bottlenecks</label>
-            <textarea id="stack" name="stack" rows="4" required
-              placeholder="e.g., Odoo 16 + HubSpot; lead routing is manual, sync drift on custom fields"></textarea>
-          </div>
-          <!-- Honeypot -->
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-          <button type="submit" class="cta-primary">Submit audit request</button>
-        </form>
-      ) : (
-        <p class="form-disabled">
-          Form backend not configured. Set <code>siteConfig.forms.formspreeFormId</code> in <code>src/config/site.ts</code>.
-        </p>
-      )}
+  <h2 class="section-heading">Contact</h2>
+  <div class="contact-list">
+    <div class="contact-item">
+      <p class="contact-label">Email</p>
+      <a href={`mailto:${email}`} class="contact-value">{email}</a>
     </div>
-
-    <!-- TRACK B - Executive/Strategic -->
-    <div class="track track-b" id="track-b">
-      <header class="track-header">
-        <span class="track-tag">Track B · Executive</span>
-        <h3 class="track-title">Schedule an Enterprise Briefing</h3>
-        {siteConfig.scheduling.briefingSubtitle ? (
-          <p class="track-subtitle">{siteConfig.scheduling.briefingSubtitle}</p>
-        ) : (
-          <p class="track-subtitle track-subtitle-missing">[Obaid to provide: who this is for]</p>
-        )}
-      </header>
-
-      <div class="briefing-body">
-        {scheduleUrl ? (
-          <a href={scheduleUrl} class="cta-primary schedule-cta" target="_blank" rel="noopener noreferrer">
-            Open scheduling · {siteConfig.scheduling.provider}
-          </a>
-        ) : (
-          <p class="form-disabled">
-            Scheduling not configured. Set <code>siteConfig.scheduling.url</code> in <code>src/config/site.ts</code>.
-          </p>
-        )}
-      </div>
+    <div class="contact-item">
+      <p class="contact-label">Phone</p>
+      <a href={`tel:${phone.replace(/\s/g, '')}`} class="contact-value">{phone}</a>
     </div>
   </div>
 </section>
@@ -97,123 +19,48 @@ const scheduleUrl = siteConfig.scheduling.url;
 <style>
   .conversion-section {
     margin-top: 0;
-    margin-bottom: var(--section-gap);
+    margin-bottom: 3rem;
   }
-  .section-heading { font-size: clamp(1.75rem, 4vw, 3rem); }
-  .section-intro { max-width: 48rem; margin-bottom: 3rem; }
-  .tracks-grid {
+  .contact-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
   }
-  .track {
-    border: 2px solid var(--color-riso-teal);
-    background-color: var(--color-riso-paper);
+  .contact-item {
+    border: 2px solid var(--riso-teal);
+    background-color: var(--riso-paper);
     padding: 2rem;
-    display: flex;
-    flex-direction: column;
   }
-  .track-b {
-    border-color: var(--color-riso-vermilion);
-  }
-  .track-header { margin-bottom: 1.5rem; }
-  .track-tag {
+  .contact-label {
     font-family: var(--font-technical);
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--color-riso-teal);
+    letter-spacing: 0.18em;
+    color: var(--riso-teal);
     opacity: 0.7;
+    margin: 0 0 1rem;
   }
-  .track-b .track-tag { color: var(--color-riso-vermilion); opacity: 1; }
-  .track-title {
-    background: transparent;
-    color: var(--color-riso-teal);
-    border-left: none;
-    padding: 0;
-    margin: 0.5rem 0;
-    font-size: 1.5rem;
-  }
-  .track-subtitle {
-    font-size: 0.9rem;
-    color: var(--color-riso-ink);
-    margin: 0;
-  }
-  .track-subtitle-missing {
-    font-style: italic;
-    color: var(--color-riso-vermilion);
-    opacity: 0.7;
-    font-size: 0.85em;
-  }
-
-  /* ---- Form (Track A) ---- */
-  .audit-form { display: flex; flex-direction: column; gap: 0.875rem; }
-  .form-row { display: flex; flex-direction: column; gap: 0.25rem; }
-  .form-row label {
-    font-family: var(--font-technical);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--color-riso-teal);
-  }
-  .form-row input,
-  .form-row select,
-  .form-row textarea {
+  .contact-value {
     font-family: var(--font-body);
-    font-size: 0.95rem;
-    padding: 0.6rem 0.75rem;
-    border: 1px solid var(--color-riso-teal);
-    background-color: var(--color-riso-paper);
-    color: var(--color-riso-ink);
-    border-radius: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--riso-teal);
+    text-decoration: underline;
+    text-decoration-color: var(--riso-vermilion);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+    display: block;
+    transition: color 0.15s ease;
   }
-  .form-row input:focus,
-  .form-row select:focus,
-  .form-row textarea:focus {
-    outline: 2px solid var(--color-riso-electric);
-    outline-offset: 1px;
-    border-color: var(--color-riso-electric);
-  }
-  .cta-primary {
-    font-family: var(--font-clinical);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 0.75rem 1.25rem;
-    font-size: 0.9rem;
-    background-color: var(--color-riso-vermilion);
-    color: var(--color-riso-paper);
-    border: 2px solid var(--color-riso-vermilion);
-    cursor: pointer;
-    margin-top: 0.5rem;
-    transition: background-color 0.15s ease, color 0.15s ease;
-  }
-  .cta-primary:hover {
-    background-color: transparent;
+  .contact-value:hover {
     color: var(--color-riso-vermilion);
   }
-  .schedule-cta {
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
-  }
-  .form-disabled {
-    font-family: var(--font-technical);
-    font-size: 0.85rem;
-    color: var(--color-riso-vermilion);
-    opacity: 0.8;
-    padding: 1rem;
-    border: 1px dashed var(--color-riso-vermilion);
-  }
-  .form-disabled code {
-    font-family: var(--font-technical);
-    background-color: rgba(230, 126, 34, 0.1);
-    padding: 0.1em 0.3em;
-    font-size: 0.8em;
-  }
-
   @media (max-width: 640px) {
-    .tracks-grid { grid-template-columns: 1fr; }
-    .track { padding: 1.25rem; }
+    .contact-list {
+      grid-template-columns: 1fr;
+    }
+    .contact-item {
+      padding: 1.25rem;
+    }
   }
 </style>
